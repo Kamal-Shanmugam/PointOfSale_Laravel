@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SalesReport;
 use App\Models\Invoice;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -30,7 +31,7 @@ class SalesReportController extends Controller
         $invoices = Invoice::whereBetween('saleDate', [$from, $to])->get();
         $total_sales = $invoices->sum('amount');
         $total_orders = $invoices->count();
-        $details = $invoices->map(function($invoice) {
+        $details = $invoices->map(function ($invoice) {
             // Always decode books_sold JSON for the report
             $booksSold = $invoice->books_sold;
             if (is_string($booksSold)) {
@@ -63,5 +64,11 @@ class SalesReportController extends Controller
     {
         $report = SalesReport::findOrFail($id);
         return view('sales_report.show', compact('report'));
+    }
+    public function download($id)
+    {
+        $report = SalesReport::findOrFail($id);
+        $pdf = Pdf::loadView('sales_report.download_report', compact('report',));
+        return $pdf->download('sales_report_' . $report->id . '.pdf');
     }
 }

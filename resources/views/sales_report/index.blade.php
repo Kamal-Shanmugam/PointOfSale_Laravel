@@ -20,7 +20,7 @@
                 <button type="submit" class="btn btn-primary">Generate Report</button>
             </div>
         </form>
-        <table class="table table-bordered">
+        <table class="table table-bordered text-center">
             <thead>
                 <tr>
                     <th>#</th>
@@ -37,8 +37,10 @@
                         <td>{{ $report->report_date }}</td>
                         <td>₹{{ number_format($report->total_sales, 2) }}</td>
                         <td>{{ $report->total_orders }}</td>
-                        <td>
+                        <td class="container d-flex justify-content-center gap-3">
                             <a href="{{ route('sales_report.show', $report->id) }}" class="btn btn-info btn-sm">View</a>
+                            <a href="{{ route('sales_report.download', $report->id) }}"target="_blank"
+                                class="btn btn-warning btn-sm">Download</a>
                         </td>
                     </tr>
                 @endforeach

@@ -73,6 +73,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/sales-reports', [SalesReportController::class, 'index'])->name('sales_report.index');
     Route::post('/sales-reports/generate', [SalesReportController::class, 'generate'])->name('sales_report.generate');
     Route::get('/sales-reports/{id}', [SalesReportController::class, 'show'])->name('sales_report.show');
+    Route::get('/sales-reports/download/{id}', [SalesReportController::class, 'download'])->name('sales_report.download');
 });
 
 
