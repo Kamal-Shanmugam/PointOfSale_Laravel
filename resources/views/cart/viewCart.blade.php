@@ -29,14 +29,14 @@
                         @endphp
                         <tr>
                             <td>{{ $item['title'] }}</td>
-                            <td>₹{{number_format( $item['price'],2) }}</td>
-                            <td>{{number_format($item['quantity'],2) }}</td>
-                            <td>₹{{number_format( $subtotal,2) }}</td>
+                            <td>₹{{ number_format($item['price'], 2) }}</td>
+                            <td>{{ number_format($item['quantity'], 2) }}</td>
+                            <td>₹{{ number_format($subtotal, 2) }}</td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-            <h4>Total: ₹{{number_format( $total,2) }}</h4>
+            <h4>Total: ₹{{ number_format($total, 2) }}</h4>
             <form action="{{ route('checkout') }}" method="POST">
                 @csrf
                 <div class="mb-2">
@@ -46,6 +46,13 @@
                 <button type="submit" class="btn btn-success">Checkout</button>
                 <a href="{{ route('cancelorder') }}" class="btn btn-danger">Cancel order</a>
             </form>
+
+            <div class="container">
+                @if (session('err-msg'))
+                    <div class="alert text-danger fw-bold">{{ session('err-msg') }}</div>
+                @endif
+
+            </div>
         @endif
     </div>
 @endsection

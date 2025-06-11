@@ -9,9 +9,14 @@
         integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap"
+        rel="stylesheet">
 </head>
 
-<body>
+<body
+    style="font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif">
     <div class="container">
     </div>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -27,7 +32,7 @@
                                 <i class="bi bi-person-circle"></i>
                             </p>
                             <ul class="dropdown-menu">
-                                @if (in_array( auth()->user()->role , ['Admin', 'Manager']))
+                                @if (in_array(auth()->user()->role, ['Admin', 'Manager']))
                                     <li class="nav-item"><a class="dropdown-item text-tertiary fw-bold"
                                             href="{{ route('employe-Accounts') }}">Users</a></li>
                                 @endif

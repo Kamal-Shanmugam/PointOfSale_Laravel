@@ -9,7 +9,7 @@
             <strong>Total Orders:</strong> {{ $report->total_orders }}
         </div>
         <h4>Order Details</h4>
-        <table class="table table-bordered">
+        <table class="table table-bordered text-center">
             <thead>
                 <tr>
                     <th>Invoice ID</th>
@@ -25,7 +25,7 @@
                         <td>{{ $detail['id'] }}</td>
                         <td>{{ $detail['customer'] }}</td>
                         <td>{{ $detail['saleDate'] }}</td>
-                        <td>₹{{ $detail['amount'] }}</td>
+                        <td>₹{{ number_format( $detail['amount'],2) }}</td>
                         <td>
                             @php
                                 $booksSold = $detail['books_sold'];

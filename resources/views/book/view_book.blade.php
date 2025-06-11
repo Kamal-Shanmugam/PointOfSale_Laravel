@@ -8,6 +8,7 @@
                     <img src="{{ asset('Cover_images/' . $book->cover_photo) }}"
                         class="img-fluid rounded-start border border-3 mt-2" alt="cover photo" style="max-height: 200px;">
                 </div>
+
                 <div class="col-md-8">
                     <div class="card-body">
                         <h3 class="card-title fw-bold">{{ $book->title }}</h3>

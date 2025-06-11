@@ -25,34 +25,36 @@
             @endif
             <div class="row row-cols-5 gap-3">
                 @foreach ($library as $book)
-                    <div class="col border ">
-                        <div class="container ">
-                            <img src="Cover_images/{{ $book->cover_photo }}" class="border border-3 mt-2" alt="cover photo"
-                                style="max-height: 70px;">
-                            <a href="/view-book/{{ $book->id }}">
-                                <p class="text fw-bold">{{ $book->title }}</p>
-                            </a>
-                            <ul class="list-group list-group-flush list-unstyled">
-                                <li><b>Author</b> :{{ $book->author }}</li>
-                                <li><b>Publisher</b> :{{ $book->publisher }}</li>
-                                <li><b>Genre</b> :{{ $book->genre }}</li>
-                                <li><b>Price</b> :₹ {{ number_format($book->price, 2) }}/-</li>
-                                <li>Actual Price:<span
-                                        class="text-decoration-line-through text-danger">₹{{ $book->cost = number_format($book->price * 0.1 + $book->price, 2) }}</span>
-                                </li>
-                            </ul>
-                            <form action="{{ route('addCart') }}" method="post">
-                                @csrf
-                                <input type="hidden" name="id" value="{{ $book->id }}">
-                                <input type="hidden" name="title" value="{{ $book->title }}">
-                                <input type="hidden" name="price" value="{{ $book->price }}">
+                    @if ($book->quantity > 0)
+                        <div class="col border ">
+                            <div class="container ">
+                                <img src="Cover_images/{{ $book->cover_photo }}" class="border border-3 mt-2"
+                                    alt="cover photo" style="max-height: 70px;">
+                                <a href="/view-book/{{ $book->id }}">
+                                    <p class="text fw-bold">{{ $book->title }}</p>
+                                </a>
+                                <ul class="list-group list-group-flush list-unstyled">
+                                    <li><b>Author</b> :{{ $book->author }}</li>
+                                    <li><b>Publisher</b> :{{ $book->publisher }}</li>
+                                    <li><b>Genre</b> :{{ $book->genre }}</li>
+                                    <li><b>Price</b> :₹ {{ number_format($book->price, 2) }}/-</li>
+                                    <li>Actual Price:<span
+                                            class="text-decoration-line-through text-danger">₹{{ $book->cost = number_format($book->price * 0.1 + $book->price, 2) }}</span>
+                                    </li>
+                                </ul>
+                                <form action="{{ route('addCart') }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{ $book->id }}">
+                                    <input type="hidden" name="title" value="{{ $book->title }}">
+                                    <input type="hidden" name="price" value="{{ $book->price }}">
 
-                                <button class="btn btn-primary btn-sm mb-2" type="submit">Add to Cart</button>
-                            </form>
+                                    <button class="btn btn-primary btn-sm mb-2" type="submit">Add to Cart</button>
+                                </form>
+                            </div>
+
+
                         </div>
-
-
-                    </div>
+                    @endif
                 @endforeach
 
             </div>
