@@ -9,7 +9,10 @@ class Invoice extends Model
     protected $fillable = [
         'customer',
         'saleDate',
-        'book_sold',
+        'books_sold',
         'amount'
+    ];
+    protected $casts = [
+        'books_sold' => 'array',
     ];
 }

@@ -58,6 +58,7 @@ class CartController extends Controller
 
                 $totalAmount += $item['price'] * $item['quantity'];
                 // Store all details for each book
+                
                 $books_sold[] = [
                     'id' => $bookId,
                     'title' => $item['title'],
@@ -73,11 +74,13 @@ class CartController extends Controller
         $invoice = Invoice::create([
             'customer' => $request->input('customer', 'Walk-in'),
             'saleDate' => now(),
-            'books_sold' => json_encode($books_sold),
+            'books_sold' => $books_sold,
             'amount' => number_format($totalAmount, 2),
         ]);
 
+
         session()->forget('cart');
+
         return view('cart.invoice', compact('invoice', 'cart'));
     }
 }

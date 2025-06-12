@@ -36,15 +36,20 @@
             </tr>
         </thead>
         <tbody>
-            
-            @foreach ($cart as $item)
+            @if (is_array($invoice->books_sold) && count($invoice->books_sold))
+                @foreach ($invoice->books_sold as $item)
+                    <tr>
+                        <td>{{ $item['title'] }}</td>
+                        <td>{{ $item['price'] }}</td>
+                        <td>{{ $item['quantity'] }}</td>
+                        <td>{{ $item['price'] * $item['quantity'] }}</td>
+                    </tr>
+                @endforeach
+            @else
                 <tr>
-                    <td>{{ $item['title'] }}</td>
-                    <td>{{ $item['price'] }}</td>
-                    <td>{{ $item['quantity'] }}</td>
-                    <td>{{ $item['price'] * $item['quantity'] }}</td>
+                    <td colspan="4">No books sold.</td>
                 </tr>
-            @endforeach
+            @endif
         </tbody>
     </table>
     <h4>Total: {{ $invoice->amount }}</h4>

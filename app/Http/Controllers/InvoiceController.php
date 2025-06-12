@@ -14,11 +14,15 @@ class InvoiceController extends Controller
         $invoice = Invoice::findOrFail($id);
 
         $cart = [];
-        if (isset($invoice->books_sold)) {
-            $cart = json_decode($invoice->books_sold, true) ?? [];
-        } elseif (isset($invoice->book_sold)) {
-            $cart = json_decode($invoice->book_sold, true) ?? [];
-        }
+        // if (isset($invoice->books_sold)) {
+        //     $cart = $invoice->books_sold ?? [];
+        // }
+        
+        // elseif 
+        
+        // (isset($invoice->book_sold)) {
+        //     $cart = $invoice->book_sold ?? [];
+        // }
 
         $pdf = Pdf::loadView('cart.invoicePDF', compact('invoice', 'cart'));
         return $pdf->download('invoice_' . $invoice->id . '.pdf');
